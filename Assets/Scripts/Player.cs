@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Speed
+    //Speed  of Player Spaceship
     [SerializeField]
     private float _speed = 3.5f;
+    
+    [SerializeField]
+    private float _fireRate = 0.15f;
+    private float _allowFire = -1;
+
+    [SerializeField]
+    private GameObject _laserPrefab = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +24,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _allowFire)
+        {
+            FireLaser();
+        }
     }
 
     void CalculateMovement()
@@ -37,5 +48,11 @@ public class Player : MonoBehaviour
         }
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0),0);
+    }
+
+    void FireLaser()
+    {
+        _allowFire += _fireRate;
+        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
     }
 }
