@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //Enemy collision with Player
         if (other.CompareTag("Player"))
