@@ -8,7 +8,7 @@ public class Powerups : MonoBehaviour
     private float _speed = 3;
 
     [SerializeField]
-    private int _powerupID;
+    private int _powerupID = 0;
     // Start is called before the first frame update
     void Start()
     {
