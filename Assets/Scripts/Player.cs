@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     //Speed  of Player Spaceship
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private int _speedMultiplier = 2;
     
     [SerializeField]
     private float _fireRate = 0.15f;
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool _isTripleShotActive = false;
+    [SerializeField]
 
     SpawnManager _spawnManager;
     // Start is called before the first frame update
@@ -100,5 +103,17 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         _isTripleShotActive = false;
+    }
+
+    public void ActivateSpeedBoost()
+    {
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostCooldown());
+    }
+
+    IEnumerator SpeedBoostCooldown()
+    {
+        yield return new WaitForSeconds(5);
+        _speed /= _speedMultiplier;
     }
 }
