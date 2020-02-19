@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         
     }
 
@@ -31,12 +32,18 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Enemy collision with Player
         if (other.CompareTag("Player"))
         {
-            
+            Player player = other.transform.GetComponent<Player>();
+            if (player != null)
+            {
+                player.Damage();
+            }
             Destroy(this.gameObject);
         }
 
+        //Enemy collision with the Laser
         if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
