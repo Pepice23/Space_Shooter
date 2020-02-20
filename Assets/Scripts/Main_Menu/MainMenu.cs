@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    private bool _isGameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +14,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && _isGameOver)
-        {
-            SceneManager.LoadScene(1);
-        }
+        
     }
 
-    public void GameOver()
+    public void LoadGame()
     {
-        _isGameOver = true;
+        SceneManager.LoadScene(1);
     }
 }
