@@ -6,9 +6,10 @@ public class Enemy : MonoBehaviour
 {
     //Enemy speed
     [SerializeField]
-    private float _speed = 4.0f;
+    private float _speed = 3.0f;
 
     Player _player;
+    Animator _animator = null;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,11 @@ public class Enemy : MonoBehaviour
         if (_player == null)
         {
             Debug.LogError("Nincs meg a Player");
+        }
+        _animator = gameObject.GetComponent<Animator>();
+        if (_animator == null)
+        {
+            Debug.LogError("Nincs meg az Animator");
         }
 
     }
@@ -47,7 +53,9 @@ public class Enemy : MonoBehaviour
             {
                 player.Damage();
             }
-            Destroy(this.gameObject);
+            _speed = 0;
+            _animator.SetTrigger("OnEnemyDeath");
+            Destroy(this.gameObject, 3.0f);
         }
 
         //Enemy collision with the Laser
@@ -58,7 +66,10 @@ public class Enemy : MonoBehaviour
             {
                 _player.AddScore();
             }
-            Destroy(this.gameObject);
+
+            _speed = 0;
+            _animator.SetTrigger("OnEnemyDeath");
+            Destroy(this.gameObject, 3.0f);
         }
     }
 }
