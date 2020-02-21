@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score = 0;
 
+    [SerializeField]
+    private GameObject[] _engines = null;
+
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
 
@@ -105,7 +108,17 @@ public class Player : MonoBehaviour
         }
 
         _lives--;
+        if (_lives == 2)
+        {
+            _engines[0].SetActive(true);
+        }
+        if (_lives == 1)
+        {
+            _engines[1].SetActive(true);
+        }
         _uiManager.UpdateLives(_lives);
+
+
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
